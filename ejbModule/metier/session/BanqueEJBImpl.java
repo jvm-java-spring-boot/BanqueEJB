@@ -19,7 +19,7 @@ public class BanqueEJBImpl implements IBanqueLocal, IBanqueRemote{
 
 	@Override
 	public List<Compte> getAllComptes() {
-		Query req=em.createQuery("select c from Compte c.active=true");
+		Query req=em.createQuery("select c from Compte c where c.active=true");
 		return req.getResultList();
 	}
 
@@ -47,7 +47,7 @@ public class BanqueEJBImpl implements IBanqueLocal, IBanqueRemote{
 	@Override
 	public void virement(double mt, Long cpte1, Long cpte2) { //separation du code du code technique=>les transactions sont gérées implicitement par EJB
 		retirer(mt, cpte1);
-		verser(mt, cpte1);
+		verser(mt, cpte2);
 	}
 
 	@Override
